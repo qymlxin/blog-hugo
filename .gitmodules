@@ -1,0 +1,3 @@
+[submodule "themes/qyml-hugo-theme"]
+	path = themes/qyml-hugo-theme
+	url = https://github.com/qymlxin/qyml-hugo-theme.git

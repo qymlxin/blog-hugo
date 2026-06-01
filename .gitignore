@@ -1,0 +1,18 @@
+# Hugo 构建产物
+/public/
+/resources/
+
+# Hugo 锁文件
+.hugo_build.lock
+
+# Go module（Hugo 会生成/更新）
+/go.sum
+
+# 本地 vendored 主题（若用过 hugo mod vendor）
+/_vendor/
+
+# 编辑器 / 系统文件
+.DS_Store
+.idea/
+.vscode/
+*.swp

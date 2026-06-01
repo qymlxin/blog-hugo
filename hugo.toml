@@ -1,0 +1,8 @@
+baseURL = 'https://example.org/'
+# locale = 'en-us'
+locale = 'zh-cn'
+title = 'My New Hugo Project'
+
+[module]
+  [[module.imports]]
+    path = 'github.com/qymlxin/qyml-hugo-theme'
