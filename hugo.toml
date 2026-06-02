@@ -2,7 +2,19 @@ baseURL = 'https://example.org/'
 # locale = 'en-us'
 locale = 'zh-cn'
 title = 'My New Hugo Project'
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 8
 
 [module]
   [[module.imports]]
     path = 'github.com/qymlxin/qyml-hugo-theme'
+
+[params]
+  author = 'Qymlxin'
+  description = 'Personal blog of Qymlxin.'
+  subtitle = 'Stay hungry, stay foolish.'
+
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
