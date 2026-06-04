@@ -110,7 +110,7 @@ iOS 只要表单字体小于 16px，就会自动缩放整个页面——这是�
 
 ## 待办
 
-- [ ] 评论系统（Giscus，基于 GitHub Discussions）
+- [x] 评论系统（Giscus，基于 GitHub Discussions）
 - [ ] 全文搜索结果高亮
 - [ ] 文章目录（TOC）侧栏
 - [ ] 阅读进度条
