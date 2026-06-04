@@ -1,11 +1,7 @@
 baseURL = 'https://example.org/'
-# locale = 'en-us'
 locale = 'zh-cn'
-title = 'My New Hugo Project'
+title = 'Qymlxin Blog'
 enableRobotsTXT = true
-
-[pagination]
-  pagerSize = 8
 
 [module]
   [[module.imports]]
@@ -14,7 +10,20 @@ enableRobotsTXT = true
 [params]
   author = 'Qymlxin'
   description = 'Personal blog of Qymlxin.'
-  subtitle = 'Stay hungry, stay foolish.'
+  subtitle = 'Everything is possible.'
+  avatar   = '/images/logo.png'   # 图片放 static/images/avatar.jpg
+  location = 'Chengdu, China'
 
-[outputs]
-  home = ['HTML', 'RSS', 'JSON']
+# ── 社交账号（填了才显示，没填不显示） ──
+[params.social]
+  github   = 'qymlxin'   # GitHub 用户名
+  gitee    = 'qymlxin'   # Gitee 用户名
+  # telegram = ''   # Telegram 用户名（不含 @）
+  # twitter  = ''   # X/Twitter 用户名（不含 @）
+  # weibo    = ''   # 微博用户名或完整 URL
+  # bilibili = ''   # B站 UID 或完整 space URL
+  # douyin   = ''   # 抖音主页完整 URL
+  # wechat   = ''   # 微信号（显示为文字标签，不可点击）
+  # qq       = '2593654373'   # QQ 号（显示为文字标签，不可点击）
+  email    = 'qymlxin@gmail.com'   # 邮箱地址
+  # website  = ''   # 个人网站完整 URL
