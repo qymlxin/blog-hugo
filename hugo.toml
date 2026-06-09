@@ -3,6 +3,10 @@ locale = 'zh-cn'
 title = 'Qymlxin Blog'
 enableRobotsTXT = true
 
+# outputs 必须在站点配置中定义，不会从主题继承
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
+
 [module]
   [[module.imports]]
     path = 'github.com/qymlxin/qyml-hugo-theme'
