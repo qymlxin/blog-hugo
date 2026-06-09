@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'http://124.222.227.81/'
 locale = 'zh-cn'
 title = 'Qymlxin Blog'
 enableRobotsTXT = true
