@@ -1,4 +1,4 @@
-baseURL = 'http://124.222.227.81/'
+baseURL = 'https://qymlxin.cn'
 locale = 'zh-cn'
 title = 'Qymlxin Blog'
 enableRobotsTXT = true
@@ -18,6 +18,11 @@ enableRobotsTXT = true
   avatar   = '/images/logo.png'   # 图片放 static/images/avatar.jpg
   location = 'Chengdu, China'
 
+[params.artalk]
+  server = 'https://artalk.qymlxin.cn'
+  site = 'qymlxin_blog'
+  localSite = '' # 仅供 HUGO_PARAMS_ARTALK_LOCALSITE 在本地启动时临时覆盖
+
 # ── 社交账号（填了才显示，没填不显示） ──
 [params.social]
   github   = 'qymlxin'   # GitHub 用户名
@@ -27,7 +32,7 @@ enableRobotsTXT = true
   # weibo    = ''   # 微博用户名或完整 URL
   # bilibili = ''   # B站 UID 或完整 space URL
   # douyin   = ''   # 抖音主页完整 URL
-  # wechat   = ''   # 微信号（显示为文字标签，不可点击）
+  wechat   = 'vx15983207568'   # 微信号（显示为文字标签，不可点击）
   # qq       = '2593654373'   # QQ 号（显示为文字标签，不可点击）
   email    = 'qymlxin@gmail.com'   # 邮箱地址
   # website  = ''   # 个人网站完整 URL
