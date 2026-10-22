@@ -27,6 +27,19 @@ if ! command -v rsync >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! command -v npm >/dev/null 2>&1; then
+  echo "错误: 未找到 npm，请先安装 Node.js 22+" >&2
+  exit 1
+fi
+
+if [[ ! -x node_modules/.bin/esbuild || ! -x node_modules/.bin/playwright ]]; then
+  echo "错误: 未安装图表构建依赖，请先运行 npm install 和 npm run diagrams:setup" >&2
+  exit 1
+fi
+
+echo "==> 生成 Excalidraw SVG 图表"
+npm run diagrams
+
 echo "==> 构建站点 (hugo ${HUGO_FLAGS})"
 hugo ${HUGO_FLAGS}
 

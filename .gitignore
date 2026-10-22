@@ -1,3 +1,7 @@
+# Node build dependencies and generated diagrams
+/node_modules/
+/static/diagrams/generated/
+
 # Hugo 构建产物
 /public/
 /resources/

@@ -17,6 +17,11 @@ enableRobotsTXT = true
   subtitle = 'Everything is possible.'
   avatar   = '/images/logo.png'   # 图片放 static/images/avatar.jpg
   location = 'Chengdu, China'
+  homeIntro = '记录写代码时遇到的问题，也留下一些平时的想法。'
+  homeCoverTitle = '代码、系统与长期思考'
+  homeBanner = '/images/lake.jpg'
+  homeBannerDark = '/images/lake.jpg'
+  homeBannerAlt = '湖畔山城、远山和水面组成的首页横幅'
 
 [params.artalk]
   server = 'https://artalk.qymlxin.cn'

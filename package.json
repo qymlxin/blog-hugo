@@ -1,0 +1,20 @@
+{
+  "name": "qymlxin-blog-build-tools",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "diagrams": "node scripts/export-diagrams.mjs --clean",
+    "diagrams:setup": "playwright install chromium",
+    "build": "npm run diagrams && hugo --minify",
+    "dev": "npm run diagrams && hugo server --disableFastRender",
+    "test:diagrams": "node --test scripts/export-diagrams.test.mjs"
+  },
+  "devDependencies": {
+    "@excalidraw/utils": "0.1.7",
+    "esbuild": "0.25.12",
+    "playwright": "1.56.1"
+  }
+}
