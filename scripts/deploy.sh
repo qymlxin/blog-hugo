@@ -6,14 +6,14 @@ set -euo pipefail
 # 可选环境变量:
 #   DEPLOY_HOST   SSH 别名，默认 ucloud
 #   DEPLOY_PATH   服务器目录，默认 /var/www/blog
-#   HUGO_FLAGS    hugo 构建参数，默认 --minify
+#   HUGO_FLAGS    hugo 构建参数，默认 --gc --minify --cleanDestinationDir
 
 # 解析项目根目录（必须在脚本内执行，不能复制到终端里单独跑）
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 DEPLOY_HOST="${DEPLOY_HOST:-ucloud}"
 DEPLOY_PATH="${DEPLOY_PATH:-/var/www/blog}"
-HUGO_FLAGS="${HUGO_FLAGS:---minify}"
+HUGO_FLAGS="${HUGO_FLAGS:---gc --minify --cleanDestinationDir}"
 
 cd "$ROOT_DIR"
 
@@ -26,19 +26,6 @@ if ! command -v rsync >/dev/null 2>&1; then
   echo "错误: 未找到 rsync" >&2
   exit 1
 fi
-
-if ! command -v npm >/dev/null 2>&1; then
-  echo "错误: 未找到 npm，请先安装 Node.js 22+" >&2
-  exit 1
-fi
-
-if [[ ! -x node_modules/.bin/esbuild || ! -x node_modules/.bin/playwright ]]; then
-  echo "错误: 未安装图表构建依赖，请先运行 npm install 和 npm run diagrams:setup" >&2
-  exit 1
-fi
-
-echo "==> 生成 Excalidraw SVG 图表"
-npm run diagrams
 
 echo "==> 构建站点 (hugo ${HUGO_FLAGS})"
 hugo ${HUGO_FLAGS}

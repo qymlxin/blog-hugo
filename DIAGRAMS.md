@@ -1,125 +1,73 @@
 # Excalidraw 图表
 
-博客使用 Excalidraw 的 `.excalidraw` 文件作为源文件，在构建前自动生成亮色和暗色 SVG。网站运行时只加载 SVG，不加载 Excalidraw 编辑器。
+博客采用 **`.excalidraw.svg` 单文件方案**：利用 Excalidraw 的 **Embed scene（内嵌场景数据）** 能力，一个 `.excalidraw.svg` 文件**既是浏览器可直接加载的矢量图，又内嵌了完整的可编辑源码**。
+
+无需 Node.js、Playwright 或构建前转换脚本，Hugo 单二进制即可直接编译发布。
 
 ## 文件位置
 
-将源文件放在：
+将图表文件放在：
 
 ```text
-static/diagrams/source/
+static/diagrams/
 ```
 
 例如：
 
 ```text
-static/diagrams/source/excalidraw-workflow.excalidraw
+static/diagrams/excalidraw-workflow.excalidraw.svg
 ```
 
-生成文件会写入：
+所有 `.excalidraw.svg` 直接提交到 Git。
 
-```text
-static/diagrams/generated/excalidraw-workflow.svg
-static/diagrams/generated/excalidraw-workflow.dark.svg
-```
+## 日常绘制与修改
 
-`static/diagrams/generated/` 已加入 `.gitignore`，这些文件会在构建和部署前自动重新生成；`.excalidraw` 源文件需要提交到 Git。
+有两种方式，任选其一：
 
-## 首次安装
-
-项目需要 Node.js 22 或更高版本，以及 Playwright 使用的 Chromium：
-
-```bash
-npm install
-npm run diagrams:setup
-```
-
-`npm run diagrams:setup` 只需要在本机或部署机器首次安装时执行一次。
-
-## 生成图表
-
-扫描全部源文件并重新生成亮色、暗色 SVG：
-
-```bash
-npm run diagrams
-```
-
-完整构建会自动执行同样的步骤：
-
-```bash
-npm run build
-```
-
-部署脚本也会先执行 `npm run diagrams`，所以不需要手动把生成的 SVG 上传到服务器。
+1. **VS Code / Antigravity Excalidraw 插件（推荐，免手动导出）**
+   - 在 `static/diagrams/` 下新建或打开 `xxx.excalidraw.svg`；
+   - 在画布中绘制完成后按 `Cmd + S` 保存，插件会自动同步写入渲染后的 SVG 与可编辑场景数据；
+   - 后续需要修改时，直接再次双击该 `.excalidraw.svg` 编辑保存即可。
+2. **网页版 `excalidraw.com`**
+   - 画完后点击导出 SVG（**Export image → SVG**），并确保勾选 **Embed scene**；
+   - 将文件保存为 `static/diagrams/xxx.excalidraw.svg`；
+   - 下次需要修改时，直接将该文件拖入 `excalidraw.com` 即可还原编辑。
 
 ## 在文章中引用
 
+最简写法（推荐，暗夜模式由主题 CSS 自动适配）：
+
 ```markdown
-{{< excalidraw
-  src="diagrams/generated/excalidraw-workflow.svg"
-  dark="diagrams/generated/excalidraw-workflow.dark.svg"
-  alt="文章写作与 Hugo 构建流程图"
-  caption="源文件保留在 static/diagrams/source/，发布时只加载 SVG。"
->}}
+{{</* excalidraw
+  src="diagrams/excalidraw-workflow.excalidraw.svg"
+  alt="编辑 .excalidraw.svg、Hugo 直接静态构建、亮暗自动适配显示的流程图"
+  caption=".excalidraw.svg 内嵌可编辑场景数据，亮暗主题由 CSS 自动适配。"
+*/>}}
 ```
 
 参数说明：
 
-- `src`：亮色 SVG 路径，必填。
-- `dark`：暗色 SVG 路径，可选；省略时始终使用亮色版本。
+- `src`：SVG 路径（相对于 `static/`），必填。
 - `alt`：图片替代文本，建议填写具体内容。
 - `caption`：图片下方说明，可选。
-
-主题会根据当前的亮色/暗色设置自动显示对应的 SVG。浏览器不会进行 Excalidraw 转换，也不会请求 Chromium。
+- `invert`：可选，默认启用自动暗夜反色；若图表为纯照片或不想在暗色下反色，可设置 `invert="false"`。
+- `dark`：可选，独立暗色版 SVG 路径。当某张图对暗夜配色有精细要求时，可单独传入 `dark="diagrams/xxx.dark.svg"`，此时会自动切换双图，不再应用 CSS 反色滤镜。
 
 ## 完整示例
 
-仓库中包含一个可以直接使用的示例：
+仓库中包含一篇草稿示例与对应的图表文件：
 
-```text
-static/diagrams/source/excalidraw-workflow.excalidraw
-content/posts/excalidraw-example.md
-```
+- 图表文件：`static/diagrams/excalidraw-workflow.excalidraw.svg`
+- 示例文章：`content/posts/excalidraw-example.md`
 
-本地预览草稿文章：
+本地预览草稿：
 
 ```bash
-npm run diagrams
 hugo server -D
 ```
 
-打开：
+浏览器打开：
 
 ```text
 http://localhost:1313/posts/excalidraw-example/
 ```
-
-这个示例展示了三个步骤：编辑 `.excalidraw` 源文件、构建阶段导出 SVG、Hugo 发布静态页面。
-
-## 修改图表后的流程
-
-1. 在 Excalidraw 中打开并修改 `static/diagrams/source/` 下的源文件。
-2. 保存 `.excalidraw` 文件。
-3. 执行 `npm run diagrams` 检查导出结果。
-4. 在文章中引用生成后的亮色和暗色路径。
-5. 提交 `.excalidraw` 源文件和文章；生成的 SVG 不需要提交。
-
-## 常见问题
-
-### 找不到 Chromium
-
-执行：
-
-```bash
-npm run diagrams:setup
-```
-
-如果 Chromium 安装在自定义路径，可以设置：
-
-```bash
-EXCALIDRAW_CHROMIUM_PATH=/path/to/Chromium npm run diagrams
-```
-
-### 为什么使用 `@excalidraw/utils`
-
-`@excalidraw/excalidraw` 是完整的 React 编辑器。当前需求只是构建阶段导出 SVG，因此使用官方的 `@excalidraw/utils` 导出层更轻量，也不需要把编辑器加载到网站前端。

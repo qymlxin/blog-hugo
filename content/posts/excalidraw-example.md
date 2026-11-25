@@ -4,29 +4,27 @@ draft = true
 title = 'Excalidraw 图表构建示例'
 tags = ['Hugo', 'Excalidraw', '建站']
 categories = ['建站']
-summary = '示范如何保留 .excalidraw 源文件，并在 Hugo 构建前自动生成亮色和暗色 SVG。'
+summary = '示范如何直接保存内嵌场景数据的 .excalidraw.svg 文件，零构建依赖完成 Hugo 发布与亮暗主题适配。'
 +++
 
-这是一篇用于预览的草稿，展示博客中的 Excalidraw 图表发布流程。
+这是一篇用于预览的草稿，展示博客中零依赖的 Excalidraw 图表工作流。
 
 <!--more-->
 
-## 源文件到 SVG
+## 一份 `.excalidraw.svg` 兼顾展示与再编辑
 
-文章引用的是构建阶段生成的 SVG，浏览器不会加载 Excalidraw 编辑器，也不会在运行时进行转换。
+借助 Excalidraw 的内嵌场景（Embed scene）格式，`.excalidraw.svg` **本身既是可直接发布的 SVG 图片，也内嵌了完整的可编辑场景数据**。整个博客无需 Node、Playwright 或后台转换脚本，Hugo 直接静态构建即可。
 
 {{< excalidraw
-  src="diagrams/generated/excalidraw-workflow.svg"
-  dark="diagrams/generated/excalidraw-workflow.dark.svg"
-  alt="编辑 Excalidraw 源文件、构建导出 SVG、浏览器显示 SVG 的流程图"
-  caption=".excalidraw 是可继续编辑的源文件，网站发布的是亮色和暗色 SVG。"
+  src="diagrams/excalidraw-workflow.excalidraw.svg"
+  alt="编辑 .excalidraw.svg、Hugo 直接静态构建、亮暗自动适配显示的流程图"
+  caption=".excalidraw.svg 内嵌可编辑场景数据，亮暗主题由 CSS 自动适配。"
 >}}
 
 ## 本地预览
 
 ```bash
-npm run diagrams
 hugo server -D
 ```
 
-打开 `/posts/excalidraw-example/` 即可查看这篇草稿。切换页面主题时，图表会自动切换到对应的 SVG 文件。
+打开 `/posts/excalidraw-example/` 即可查看这篇草稿。切换页面亮暗主题时，图表会自动反色适配；若对配色有精细要求，也可额外传入 `dark="..."` 指定独立暗色 SVG。
