@@ -24,6 +24,7 @@ enableRobotsTXT = true
   homeBannerAlt = '湖畔山城、远山和水面组成的首页横幅'
 
 [params.artalk]
+  enabled = true
   server = 'https://artalk.qymlxin.cn'
   site = 'qymlxin_blog'
   localSite = '' # 仅供 HUGO_PARAMS_ARTALK_LOCALSITE 在本地启动时临时覆盖
