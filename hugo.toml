@@ -1,6 +1,6 @@
 baseURL = 'https://qymlxin.cn'
 locale = 'zh-cn'
-title = 'Qymlxin Blog'
+title = 'Ethan Blog'
 enableRobotsTXT = true
 
 # outputs 必须在站点配置中定义，不会从主题继承
@@ -12,7 +12,7 @@ enableRobotsTXT = true
     path = 'github.com/qymlxin/qyml-hugo-theme'
 
 [params]
-  author = 'Qymlxin'
+  author = '三寸光阴'
   description = 'Personal blog of Qymlxin.'
   subtitle = 'Everything is possible.'
   avatar   = '/images/logo.png'   # 图片放 static/images/avatar.jpg
